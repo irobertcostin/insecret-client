@@ -9,7 +9,7 @@ import { Dialog, Transition } from '@headlessui/react'
 
 export default function Navbar() {
 
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
 
 
     const [open, setOpen] = useState(false)
@@ -44,12 +44,12 @@ export default function Navbar() {
     return (
         <div className="">
             <aside id="separator-sidebar" className="fixed top-0 left-0 z-40 w-screen bg-[#5A3AF8] transition-transform sm:-translate-x-full" aria-label="Sidebar">
-                <div className=" bg-black bg-opacity-70 py-5 px-5 sm:hidden">
+                <div className=" bg-black bg-opacity-30 py-5 px-5 sm:hidden">
                     <div className="flex justify-between items-center">
                         <button onClick={() => { setOpen(true) }} className="text-slate-200 hover:text-white flex items-center gap-4 font-semibold">
                             <Bars3CenterLeftIcon className="h-7" />
                         </button>
-                        <button className="text-slate-200 hover:text-white flex items-center gap-4 font-semibold">
+                        <button onClick={() => { navigate("/autentificare") }} className="text-slate-200 hover:text-white flex items-center gap-4 font-semibold">
                             <UserCircleIcon className="h-7" />
                         </button>
                     </div>
@@ -58,13 +58,13 @@ export default function Navbar() {
 
 
             <aside id="separator-sidebar" className="fixed bottom-0 left-0 z-40 w-screen bg-[#5A3AF8] transition-transform sm:-translate-x-full" aria-label="Sidebar">
-                <div className=" px-3 overflow-y-auto bg-black bg-opacity-70 py-5  sm:hidden">
+                <div className=" px-3 overflow-y-auto bg-black bg-opacity-30 py-5  sm:hidden">
                     <div className="flex justify-between items-center px-12">
                         {
                             navigation.map((item) => {
                                 if (item.key !== "autentificare" && item.key !== "inregistrare") {
                                     return (
-                                        <button key={item.key} className=" flex justify-start items-center gap-4 text-slate-200 hover:text-white font-semibold">
+                                        <button onClick={() => { navigate(`${item.path}`) }} key={item.key} className=" flex justify-start items-center gap-4 text-slate-200 hover:text-white font-semibold">
                                             <div className="w-7 ">{item.icon}</div>
                                         </button>
                                     )
@@ -84,7 +84,7 @@ export default function Navbar() {
                         {
                             navigation.map((item) => (
                                 <li key={item.key} className="w-full ">
-                                    <button className=" flex justify-start items-center gap-4 text-slate-200 hover:text-white font-semibold">
+                                    <button onClick={() => { navigate(`${item.path}`) }} className=" flex justify-start items-center gap-4 text-slate-200 hover:text-white font-semibold">
                                         <div className="w-7 ">{item.icon}</div>
                                         <p className="hidden lg:block">{item.name}</p>
                                     </button>
@@ -154,11 +154,11 @@ export default function Navbar() {
                                         </Transition.Child>
                                         <div className="flex text-slate-400  relative h-full flex-col gap-5 overflow-y-scroll bg-slate-950 py-20 px-10 sm:py-20  shadow-xl">
                                             <div className="">
-                                                {/* <h1 className="font-bold text-white">Quick links</h1> */}
+                                                <h1 className="font-bold text-white">Quick links</h1>
                                                 <div className="w-full flex flex-col py-2 gap-2 sm:gap-4">
                                                     {
                                                         quickLinks.map((item) => (
-                                                            <button className="hover:text-white font-semibold flex gap-4 items-center ">
+                                                            <button onClick={() => { navigate(`${item.path}`); setOpen(false) }} className="hover:text-white font-semibold flex gap-4 items-center ">
                                                                 <span className="w-5 sm:w-7">{item.icon}</span>
                                                                 <span>{item.name}</span>
                                                             </button>
@@ -171,7 +171,7 @@ export default function Navbar() {
                                                 <div className="w-full flex flex-col py-2 gap-2 sm:gap-4 text-sm">
                                                     {
                                                         about.map((item) => (
-                                                            <button className="hover:text-white font-semibold flex gap-4 items-center ">
+                                                            <button onClick={() => { navigate(`${item.path}`) }} className="hover:text-white font-semibold flex gap-4 items-center ">
                                                                 <span>{item.name}</span>
                                                             </button>
                                                         ))
