@@ -15,28 +15,28 @@ export default function Navbar() {
     const [open, setOpen] = useState(false)
 
     const navigation = [
-        { name: 'Acasa', key: "acasa", path: "/", icon: <HomeIcon /> },
-        { name: 'Cauta', key: "cauta", path: '/cauta', icon: <MagnifyingGlassIcon /> },
-        { name: 'Postare noua', key: "postare-noua", path: '/cursuri', icon: <PlusCircleIcon /> },
-        { name: 'Clasament', key: "clasament", path: '/clasament', icon: <TrophyIcon /> },
-        { name: 'Autentificare', key: "autentificare", path: '/autentificare', icon: <ArrowRightStartOnRectangleIcon /> },
-        { name: 'Inregistrare', key: "inregistrare", path: '/inregistrare', icon: <UserPlusIcon /> },
+        { name: 'Acasa', key: "acasa", path: "/", icon: <HomeIcon />, id: "1" },
+        { name: 'Cauta', key: "cauta", path: '/cauta', icon: <MagnifyingGlassIcon />, id: "2" },
+        { name: 'Postare noua', key: "postare-noua", path: '/postare-noua', icon: <PlusCircleIcon />, id: "3" },
+        { name: 'Clasament', key: "clasament", path: '/clasament', icon: <TrophyIcon />, id: "4" },
+        { name: 'Autentificare', key: "autentificare", path: '/autentificare', icon: <ArrowRightStartOnRectangleIcon />, id: "5" },
+        { name: 'Inregistrare', key: "inregistrare", path: '/inregistrare', icon: <UserPlusIcon />, id: "6" },
     ]
 
     const quickLinks = [
-        { name: 'Autentificare', key: "autentificare", path: '/autentificare', icon: <ArrowRightStartOnRectangleIcon /> },
-        { name: 'Inregistrare', key: "inregistrare", path: '/inregistrare', icon: <UserPlusIcon /> },
-        { name: 'Resetare parola', key: "resetare-parola", path: '/resetare-parola', icon: <LockOpenIcon /> },
+        { name: 'Autentificare', key: "autentificare-quick", path: '/autentificare', icon: <ArrowRightStartOnRectangleIcon />, id: "7" },
+        { name: 'Inregistrare', key: "inregistrare-quick", path: '/inregistrare', icon: <UserPlusIcon />, id: "8" },
+        { name: 'Resetare parola', key: "resetare-parola", path: '/resetare-parola', icon: <LockOpenIcon />, id: "9" },
     ]
 
 
     const about = [
-        { name: 'Noi', key: "despre-noi", path: '/despre-noi', icon: <ArrowRightStartOnRectangleIcon /> },
-        { name: 'Regulament', key: "regulament", path: '/regulament', icon: <UserPlusIcon /> },
-        { name: 'Intrebari frecvente', key: "intrebari-frecvente", path: '/intrebari-frecvente', icon: <UserPlusIcon /> },
-        { name: 'Termeni si conditii', key: "termeni-conditii", path: '/termeni-conditii', icon: <UserPlusIcon /> },
-        { name: 'Politica de confidentialitate', key: "politica-confidentialitate", path: '/politica-confidentialitate', icon: <UserPlusIcon /> },
-        { name: 'Politica cookies', key: "politica-cookies", path: '/politica-cookies', icon: <UserPlusIcon /> },
+        { name: 'Noi', key: "despre-noi", path: '/despre-noi', icon: <ArrowRightStartOnRectangleIcon />, id: "10" },
+        { name: 'Regulament', key: "regulament", path: '/regulament', icon: <UserPlusIcon />, id: "11" },
+        { name: 'Intrebari frecvente', key: "intrebari-frecvente", path: '/intrebari-frecvente', icon: <UserPlusIcon />, id: "12" },
+        { name: 'Termeni si conditii', key: "termeni-conditii", path: '/termeni-conditii', icon: <UserPlusIcon />, id: "13" },
+        { name: 'Politica de confidentialitate', key: "politica-confidentialitate", path: '/politica-confidentialitate', icon: <UserPlusIcon />, id: "14" },
+        { name: 'Politica cookies', key: "politica-cookies", path: '/politica-cookies', icon: <UserPlusIcon />, id: "15" },
     ]
 
 
@@ -64,7 +64,7 @@ export default function Navbar() {
                             navigation.map((item) => {
                                 if (item.key !== "autentificare" && item.key !== "inregistrare") {
                                     return (
-                                        <button onClick={() => { navigate(`${item.path}`) }} key={item.key} className=" flex justify-start items-center gap-4 text-slate-200 hover:text-white font-semibold">
+                                        <button onClick={() => { navigate(`${item.path}`) }} key={item.id} className=" flex justify-start items-center gap-4 text-slate-200 hover:text-white font-semibold">
                                             <div className="w-7 ">{item.icon}</div>
                                         </button>
                                     )
@@ -83,7 +83,7 @@ export default function Navbar() {
                     <ul className="space-y-2 font-medium flex flex-col gap-4 ">
                         {
                             navigation.map((item) => (
-                                <li key={item.key} className="w-full ">
+                                <li key={item.id} className="w-full ">
                                     <button onClick={() => { navigate(`${item.path}`) }} className=" flex justify-start items-center gap-4 text-slate-200 hover:text-white font-semibold">
                                         <div className="w-7 ">{item.icon}</div>
                                         <p className="hidden lg:block">{item.name}</p>
