@@ -158,7 +158,7 @@ export default function Navbar() {
                                                 <div className="w-full flex flex-col py-2 gap-2 sm:gap-4">
                                                     {
                                                         quickLinks.map((item) => (
-                                                            <button onClick={() => { navigate(`${item.path}`); setOpen(false) }} className="hover:text-white font-semibold flex gap-4 items-center ">
+                                                            <button onClick={() => { navigate(`${item.path}`); setOpen(false) }} key={item.id} className="hover:text-white font-semibold flex gap-4 items-center ">
                                                                 <span className="w-5 sm:w-7">{item.icon}</span>
                                                                 <span>{item.name}</span>
                                                             </button>
@@ -171,7 +171,7 @@ export default function Navbar() {
                                                 <div className="w-full flex flex-col py-2 gap-2 sm:gap-4 text-sm">
                                                     {
                                                         about.map((item) => (
-                                                            <button onClick={() => { navigate(`${item.path}`) }} className="hover:text-white font-semibold flex gap-4 items-center ">
+                                                            <button onClick={() => { navigate(`${item.path}`) }} key={item.id} className="hover:text-white font-semibold flex gap-4 items-center ">
                                                                 <span>{item.name}</span>
                                                             </button>
                                                         ))

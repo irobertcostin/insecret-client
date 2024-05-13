@@ -1,13 +1,17 @@
 import { useState } from "react";
 import { ClipLoader } from "react-spinners"
 import { useNavigate } from "react-router-dom";
+import UserService from "../../services/UserApi";
 
 
 export default function Login() {
 
     const navigate = useNavigate()
+    const userService = new UserService();
 
-
+    const [loginAccountError, setLoginAccountError] = useState("")
+    const [loginPassError, setLoginPassError] = useState("")
+    const [loading, setLoading] = useState(false)
     const [user, setUser] = useState({
         account: "",
         password: ""
@@ -17,11 +21,22 @@ export default function Login() {
     const canSubmit = [...Object.values(allData)].every(Boolean);
 
     const login = async () => {
-        console.log(user);
-        // setUser({
-        //     account: "",
-        //     password: ""
-        // });
+        setLoginAccountError("")
+        setLoginPassError("")
+        setLoading(true)
+        const attempt = await userService.login(user)
+        if (attempt && attempt.message) {
+            if (attempt.message == "password must be longer than or equal to 6 characters"
+                || attempt.message == "Parola incorecta"
+            ) {
+                setLoginPassError(attempt.message)
+            } else {
+                setLoginAccountError(attempt.message)
+            }
+        } else {
+            console.log(attempt);
+        }
+        setLoading(false)
     };
 
 
@@ -57,6 +72,11 @@ export default function Login() {
                                     className="block w-full px-4 outline-0 rounded-sm py-1.5 text-white sm:text-sm sm:leading-6 bg-slate-800"
                                 />
                             </div>
+                            <div className="h-2">
+                                {loginAccountError !== "" && (
+                                    <div className="text-red-500 text-sm">{loginAccountError}</div>
+                                )}
+                            </div>
                         </div>
 
                         <div>
@@ -65,9 +85,9 @@ export default function Login() {
                                     Parola
                                 </label>
                                 <div className="text-sm">
-                                    <a href="#" className="font-semibold text-amber-400 hover:text-amber-300 ">
+                                    <button className="font-semibold text-amber-400 hover:text-amber-300 ">
                                         Ai uitat parola?
-                                    </a>
+                                    </button>
                                 </div>
                             </div>
                             <div className="mt-2">
@@ -86,6 +106,12 @@ export default function Login() {
                                     value={user.password}
                                     className="block w-full px-4 outline-0 rounded-sm py-1.5 text-white sm:text-sm sm:leading-6 bg-slate-800"
                                 />
+                                <div className="h-2">
+                                    {loginPassError !== "" && (
+                                        <div className="text-red-500 text-sm">{loginPassError}</div>
+                                    )}
+                                </div>
+
                             </div>
                         </div>
 
@@ -95,7 +121,14 @@ export default function Login() {
                                 disabled={!canSubmit}
                                 className={`${!canSubmit ? "bg-slate-500" : " bg-[#5A3AF8] hover:bg-[#7358fa] "} "flex w-full lg:max-w-md mt-10 justify-center rounded-md  px-3 py-1.5 text-sm font-semibold leading-6 text-white "`}
                             >
-                                Autentifica-te
+                                {
+                                    loading ?
+                                        <div className="text-white flex justify-center h-6">
+                                            <ClipLoader color="white" size={"20px"} />
+                                        </div>
+                                        :
+                                        <>Autentifica-te</>
+                                }
                             </button>
                         </div>
                     </div>
