@@ -78,7 +78,7 @@ export default function Register() {
     };
 
     const hasMinimumLetters = (str) => {
-        const letterRegex = /^[a-zA-Z]+$/;
+        const letterRegex = /^[a-zA-Z0-9]+$/;
         return letterRegex.test(str) && str.length >= 4;
     };
 
@@ -88,9 +88,11 @@ export default function Register() {
 
 
     const register = async () => {
+        if (loading) {
+            return
+        }
         setRegError("")
         setLoading(true)
-
         let gen;
         if (!gender) {
             gen = selected.name;
@@ -99,7 +101,6 @@ export default function Register() {
         }
         let newItem = { ...user, gender: gen, avatar: "" }
         const attempt = await userService.register(newItem)
-        console.log(attempt);
         if (attempt && attempt.error) {
             setRegError(attempt.message)
         } else {
@@ -454,7 +455,11 @@ export default function Register() {
                                         <button
                                             type="button"
                                             className="inline-flex w-full justify-center rounded-md bg-[#5A3AF8] hover:bg-[#7358fa] px-3 py-2 text-sm font-semibold text-white shadow-sm  sm:ml-3 sm:w-auto lg:max-w-md"
-                                            onClick={() => setOpen(false)}
+                                            onClick={() => {
+                                                setOpen(false)
+                                                navigate("/autentificare")
+                                            }
+                                            }
                                             ref={cancelButtonRef}
                                         >
                                             Am inteles
