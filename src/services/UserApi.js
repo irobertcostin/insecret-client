@@ -36,7 +36,7 @@ export default class UserService {
             let resp = await data.json();
             return resp
         } catch (error) {
-            console.log(error)
+            return error
         }
     }
 
@@ -50,6 +50,50 @@ export default class UserService {
             return error;
         }
     }
+
+
+    async validationToken(email) {
+        try {
+            let data = await this.api('/resend-validation-token', "POST", email)
+            let resp = await data.json();
+            return resp
+        } catch (error) {
+            return error;
+        }
+    }
+
+
+    async activateAccount(token) {
+        try {
+            let data = await this.api('/activate-account', "POST", token)
+            let resp = await data.json();
+            return resp
+        } catch (error) {
+            return error;
+        }
+    }
+
+    async forgottenPassword(body) {
+        try {
+            let data = await this.api('/forgot-password', "POST", body)
+            let resp = await data.json();
+            return resp
+        } catch (error) {
+            return error;
+        }
+    }
+
+
+    async confirmPasswordReset(body) {
+        try {
+            let data = await this.api('/confirm-password-reset', "POST", body)
+            let resp = await data.json();
+            return resp
+        } catch (error) {
+            return error;
+        }
+    }
+
 
 
 
